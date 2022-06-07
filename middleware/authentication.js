@@ -1,13 +1,11 @@
-const User = require('../models/User')
-const jwt = require('jsonwebtoken')
-const { UnauthenticatedError } = require('../errors')
-
+import jwt from 'jsonwebtoken'
+import { UnAuthenticatedError } from '../errors/index.js'
 
 const auth = ( req, res, next) => {
     //check header
     const authHeader = req.headers.authorization
     if(!authHeader || !authHeader.startsWith('Bearer')){
-        throw new UnauthenticatedError('Authentication invalid')
+        throw new UnAuthenticatedError('Authentication invalid')
 
     }
     //vse za Bearer
@@ -19,8 +17,8 @@ const auth = ( req, res, next) => {
         req.user = {userId: payload.userId, name:payload.name}
         next()
     } catch (error) {
-        throw new UnauthenticatedError('Authentication invalid')
+        throw new UnAuthenticatedError('Authentication invalid')
     }
 }
 
-module.exports = auth
+export default auth

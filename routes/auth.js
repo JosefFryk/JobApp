@@ -1,10 +1,19 @@
 
-const express = require('express')
+import express from 'express'
 const router = express.Router()
+import rateLimiter from 'express-rate-limit'
+//security ip limiter (moved from server.js)
+const apiLimiter = rateLimiter({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10,
+    message: 'Too many requests from this IP, please try again after 15 minutes',
+  })
 
-const { login, register } = require('../controllers/auth')
+import { register, login, updateUser } from '../controllers/auth.js'
+import authenticateUser from '../middleware/authentication.js'
 
-router.post('/register', register)
-router.post('/login', login )
+router.route('/register').post(apiLimiter, register)
+router.route('/login').post(apiLimiter, login)
+router.route('/updateUser').patch(authenticateUser, updateUser)
 
-module.exports = router
+export default router

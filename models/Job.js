@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const JobSchema = new mongoose.Schema(
   {
@@ -17,6 +17,16 @@ const JobSchema = new mongoose.Schema(
       enum: ['interview', 'declined', 'pending'],
       default: 'pending',
     },
+    jobType: {
+      type: String,
+      enum: ['full-time', 'part-time', 'remote', 'internship'],
+      default: 'full-time',
+    },
+    jobLocation: {
+      type: String,
+      default: 'Praha',
+      required: true,
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
@@ -26,4 +36,4 @@ const JobSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-module.exports = mongoose.model('Job', JobSchema)
+export default mongoose.model('Job', JobSchema)
