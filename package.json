@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "react-scripts build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
     "install-server": "npm install",
     "install-dependencies": " npm run install-client && npm run install-server ",
@@ -39,6 +39,6 @@
     "nodemon": "^2.0.15"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   }
 }
