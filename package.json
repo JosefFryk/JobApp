@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build": "react-scripts build",
     "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
     "install-server": "npm install",
     "install-dependencies": " npm run install-client && npm run install-server ",

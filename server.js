@@ -17,7 +17,13 @@ import helmet from 'helmet'
 import xss from 'xss-clean'
 import mongoSanitize from 'express-mongo-sanitize'
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
+//ready to deploy
+app.use(express.static(path.resolve(__dirname, './client/build')))
 
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})
 //routers
 import authRouter from './routes/auth.js'
 import jobsRouter from './routes/jobs.js'
@@ -32,7 +38,6 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
 }
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // extra packages
 app.use(express.json())
@@ -47,7 +52,7 @@ app.use('/api/v1/jobs',authenticateUser, jobsRouter)
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const start = async () => {
   try {
