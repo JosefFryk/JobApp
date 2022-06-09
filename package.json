@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://job-cloud-tool.herokuapp.com/",
   "scripts": {
     "build": "react-scripts build",
     "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",

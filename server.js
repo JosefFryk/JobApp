@@ -21,9 +21,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 //ready to deploy
 app.use(express.static(path.resolve(__dirname, './client/build')))
 
-app.get('*', function (request, response) {
-  response.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
-})
+// app.get('*', function (request, response) {
+//   response.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+// })
 //routers
 import authRouter from './routes/auth.js'
 import jobsRouter from './routes/jobs.js'
